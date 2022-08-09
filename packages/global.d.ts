@@ -104,7 +104,7 @@ declare module 'three-gpu-pathtracer' {
         physicalCamera: PhysicalCameraUniform;
 
         // Geometry and BVH information
-        bvh: UpdateableInterface<BVHInfoGenerate>;
+        bvh: UpdateableInterface<import("three-mesh-bvh").MeshBVH>;
         normalAttribute: import("three-mesh-bvh").FloatVertexAttributeTexture;
         tangentAttribute: import("three-mesh-bvh").FloatVertexAttributeTexture;
         uvAttribute: import("three-mesh-bvh").FloatVertexAttributeTexture;

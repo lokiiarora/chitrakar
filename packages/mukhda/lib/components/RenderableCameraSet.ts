@@ -29,9 +29,22 @@ export class RenderableCameraSet {
         }
     }
 
+    get currentCamera(): Camera {
+        if (this.currentCameraNamespace !== null) {
+            const camera = this._customCameraMap.get(this.currentCameraNamespace);
+            if (camera !== undefined) {
+                return camera;
+            }
+            return this.defaultCamera;
+        }
+        return this.defaultCamera;
+    }
+
     constructor(private resetCallback: () => void) {
         this.defaultCamera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.01, 500);
-        this.defaultCamera.position.set(-1, 0.25, 1);
+        this.defaultCamera.position.set(0, 0.25, 1);
         this._currentCamera = this.defaultCamera;
+        this.defaultCamera.updateMatrixWorld();
+        this.defaultCamera.updateProjectionMatrix();
     }
 }

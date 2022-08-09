@@ -29,6 +29,7 @@
     "url": "https://github.com/lokiiarora/chitrakar/issues"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
     "@types/three": "^0.143.0",
     "esbuild": "^0.14.54",
     "rollup": "^2.77.2",

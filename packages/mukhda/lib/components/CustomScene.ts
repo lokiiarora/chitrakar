@@ -17,11 +17,11 @@ export class CustomScene extends Scene {
         const envMap = await envMapLoader.loadAsync(url, onProgress);
         envMap.mapping = EquirectangularReflectionMapping;
         this.environment = envMap;
+        this.background = envMap;
     }
 
     public async addModel(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BVHInfoGenerate> {
         const gltf = await gltfLoader.loadAsync(url, onProgress);
-
         reducer.process(gltf.scene);
         gltf.scene.updateMatrixWorld();
         const result = await this._pathTracingBVHGenerator.generate(gltf.scene, {

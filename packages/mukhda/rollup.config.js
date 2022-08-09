@@ -7,6 +7,7 @@ const packageJSON = require("./package.json");
 
 export default {
   input: path.join(__dirname, 'lib', 'index.ts'),
+  treeshake: false,
   output: {
     dir: path.join(__dirname, 'dist'),
     format: 'es',
