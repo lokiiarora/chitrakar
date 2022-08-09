@@ -1,0 +1,44 @@
+{
+  "name": "mukhda",
+  "version": "0.0.0-beta",
+  "description": "Contains the frontend for chitrakar which can be used to render photorealistic images",
+  "keywords": [
+    "raytracing"
+  ],
+  "author": "Lokesh Raj Arora <lokesh.slg06@gmail.com>",
+  "homepage": "https://github.com/lokiiarora/chitrakar#readme",
+  "license": "MIT",
+  "main": "lib/mukhda.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lokiiarora/chitrakar.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/mukhda.test.js",
+    "bundle": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "bugs": {
+    "url": "https://github.com/lokiiarora/chitrakar/issues"
+  },
+  "devDependencies": {
+    "@types/three": "^0.143.0",
+    "esbuild": "^0.14.54",
+    "rollup": "^2.77.2",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-esbuild": "^4.9.1",
+    "rollup-plugin-live-server": "^2.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  },
+  "dependencies": {
+    "three": "^0.139.2",
+    "three-gpu-pathtracer": "^0.0.6"
+  }
+}

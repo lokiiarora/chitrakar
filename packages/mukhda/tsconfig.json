@@ -1,0 +1,13 @@
+{
+    "extends": "../../tsconfig.json",
+    "include": [
+      "lib/**/*",
+      "../global.d.ts"
+    ],
+    "compilerOptions": {
+      "outDir": "dist",
+      "strict": true,
+      "importsNotUsedAsValues": "error",
+      "typeRoots": ["node_modules/@types"]
+    }
+  }
