@@ -75,6 +75,12 @@ export class Stage {
                 const percent =(event.loaded / event.total) * 100;
                 Logger.debug(`${config.hdri} with Job id ${config.jobId} -> Percent loaded: ${percent}%`);
             }
+        });
+        await this._scene.loadIESTexture(config.iesUri, (event: ProgressEvent) => {
+            if (event.lengthComputable) {
+                const percent =(event.loaded / event.total) * 100;
+                Logger.debug(`${config.iesUri} with Job id ${config.jobId} -> Percent loaded: ${percent}%`);
+            }
         })
         const bvhInfo = await this._scene.addModel(config.url, (event: ProgressEvent) => {
             if (event.lengthComputable) {
@@ -83,7 +89,7 @@ export class Stage {
             }
         });
         this._ptRenderer.setRenderResolution(new Vector2().set(config.renderResolution[0], config.renderResolution[1]));
-        this._ptRenderer.updateBVHInfo(bvhInfo, this._scene.environment!);
+        this._ptRenderer.updateBVHInfo(bvhInfo, this._scene.environment!, this._scene.iesTexture);
         this._ptRenderer.updateRenderSettings(config.bounces, config.environmentIntensity, config.filterGlossyFactor);
         fitCameraToSelection(this._renderableCameraSet.currentCamera as PerspectiveCamera, this._orbitControls, [bvhInfo.scene]);
         this._animate();

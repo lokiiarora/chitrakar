@@ -81,9 +81,9 @@ declare module 'three-gpu-pathtracer' {
         ): void
     }
 
-    export class IESProfilesTexture extends THREE.DataTexture { }
+    export class IESProfilesTexture extends THREE.WebGLArrayRenderTarget { }
 
-
+    export class IESLoader extends THREE.TextureLoader {}
     export class MaterialsTexture extends THREE.DataTexture {
         threeCompatibilityTransforms: Boolean;
         setSide(index: Number, side: THREE.Side): void

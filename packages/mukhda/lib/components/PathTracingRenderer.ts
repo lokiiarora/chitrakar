@@ -30,7 +30,7 @@ export class CustomPathTracingRenderer extends PathTracingRenderer {
         })
     }
 
-    public updateBVHInfo(bvhInfo: BVHInfoGenerate, environmentMap: Texture) {
+    public updateBVHInfo(bvhInfo: BVHInfoGenerate, environmentMap: Nullable<Texture>, iesTexture: Nullable<Texture>) {
         const { textures, materials, lights } = bvhInfo;
         const { geometry } = bvhInfo.bvh;
         this.material.bvh.updateFrom(bvhInfo.bvh);
@@ -40,8 +40,10 @@ export class CustomPathTracingRenderer extends PathTracingRenderer {
         this.material.materialIndexAttribute.updateFrom(geometry.attributes.materialIndex as BufferAttribute);
         this.material.textures.setTextures(this.renderer, 2048, 2048, textures);
         this.material.materials.updateFrom(materials, textures);
-        this.material.envMapInfo.updateFrom(environmentMap);
-        this.material.lights.updateFrom(lights, []);
+        if (environmentMap !== null) {
+            this.material.envMapInfo.updateFrom(environmentMap);
+        }
+        this.material.lights.updateFrom(lights, iesTexture !== null ? [iesTexture] : []);
     }
 
     public setRenderResolution(resolution: Vector2) {

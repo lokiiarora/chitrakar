@@ -8,4 +8,5 @@ export interface StageRenderConfig {
     bounces: number;
     filterGlossyFactor: number;
     environmentIntensity: number;
+    iesUri: string;
 }
