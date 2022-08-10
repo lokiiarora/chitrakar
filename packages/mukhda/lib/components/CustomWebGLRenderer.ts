@@ -1,4 +1,4 @@
-import { ACESFilmicToneMapping, sRGBEncoding, WebGLRenderer } from 'three';
+import { ACESFilmicToneMapping, Color, sRGBEncoding, WebGLRenderer } from 'three';
 
 
 export class CustomWebGLRenderer extends WebGLRenderer {
@@ -12,6 +12,7 @@ export class CustomWebGLRenderer extends WebGLRenderer {
         this.outputEncoding = sRGBEncoding;
         this.toneMapping = ACESFilmicToneMapping;
         this.physicallyCorrectLights = true;
+        this.setClearColor(new Color(1, 1, 1), 0);
         // const { innerWidth: width, innerHeight: height } = window;
         // this.setSize(width * dpr, height * dpr);
     }

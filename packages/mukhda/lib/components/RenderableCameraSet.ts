@@ -1,9 +1,10 @@
-import { Camera, PerspectiveCamera } from "three";
+import { Camera, OrthographicCamera, PerspectiveCamera, Vector2 } from "three";
+import { Logger } from "./Logger";
 
 export class RenderableCameraSet {
-    private _customCameraMap = new Map<string, Camera>();
+    private _customCameraMap = new Map<string, PerspectiveCamera | OrthographicCamera>();
 
-    private defaultCamera: PerspectiveCamera;
+    public defaultCamera: PerspectiveCamera;
 
     private _currentCamera: Camera;
 
@@ -46,5 +47,25 @@ export class RenderableCameraSet {
         this._currentCamera = this.defaultCamera;
         this.defaultCamera.updateMatrixWorld();
         this.defaultCamera.updateProjectionMatrix();
+    }
+
+    public updateSize(size: Vector2) {
+        this.defaultCamera.aspect = size.x / size.y;
+        this.defaultCamera.updateProjectionMatrix();
+        this._customCameraMap.forEach((c) => {
+            if (c instanceof PerspectiveCamera) {
+                c.aspect = size.x / size.y;
+            }
+            c.updateProjectionMatrix();
+        })
+    }
+
+    public feedCameras(cameras: Camera[]) {
+        for(let camera of cameras) {
+            if (camera instanceof PerspectiveCamera || camera instanceof OrthographicCamera) {
+                this._customCameraMap.set(camera.name, camera);
+            }
+        }
+        Logger.debug("Camera map", this._customCameraMap);
     }
 }

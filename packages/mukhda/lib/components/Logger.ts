@@ -7,23 +7,23 @@ export enum LogLevel {
 export class Logger {
     public static LOG_LEVEL: LogLevel = LogLevel.ERROR;
 
-    private static TAG = (message: string) => console.log("chitrakar:mukhda:debug", message)
+    private static TAG = (...args: any[]) => console.log("chitrakar:mukhda:debug", ...args)
     
-    private static log(level: LogLevel, message: string = "") {
+    private static log(level: LogLevel, ...args: any[]) {
         if (this.LOG_LEVEL <= level) {
-            Logger.TAG(message);
+            Logger.TAG(...args);
         }
     }
 
-    public static debug(message: string = "") {
-        this.log(LogLevel.VERBOSE, message)
+    public static debug(...args: any[]) {
+        this.log(LogLevel.VERBOSE, ...args)
     }
 
-    public static warn(message: string = "") {
-        this.log(LogLevel.WARN, message)
+    public static warn(...args: any[]) {
+        this.log(LogLevel.WARN, ...args)
     }
 
-    public static error(message: string = "") {
-        this.log(LogLevel.ERROR, message)
+    public static error(...args: any[]) {
+        this.log(LogLevel.ERROR, ...args)
     }
 }

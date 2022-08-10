@@ -76,22 +76,31 @@ export class Stage {
                 Logger.debug(`${config.hdri} with Job id ${config.jobId} -> Percent loaded: ${percent}%`);
             }
         });
-        await this._scene.loadIESTexture(config.iesUri, (event: ProgressEvent) => {
-            if (event.lengthComputable) {
-                const percent =(event.loaded / event.total) * 100;
-                Logger.debug(`${config.iesUri} with Job id ${config.jobId} -> Percent loaded: ${percent}%`);
-            }
-        })
-        const bvhInfo = await this._scene.addModel(config.url, (event: ProgressEvent) => {
+        if(config.iesUri) {
+            await this._scene.loadIESTexture(config.iesUri, (event: ProgressEvent) => {
+                if (event.lengthComputable) {
+                    const percent =(event.loaded / event.total) * 100;
+                    Logger.debug(`${config.iesUri} with Job id ${config.jobId} -> Percent loaded: ${percent}%`);
+                }
+            })
+        }
+        const { bvhResult: bvhInfo, cameras } = await this._scene.addModel(config.url, (event: ProgressEvent) => {
             if (event.lengthComputable) {
                 const percent =(event.loaded / event.total) * 100;
                 Logger.debug(`${config.url} with Job id ${config.jobId} -> Percent loaded: ${percent}%`);
             }
         });
         this._ptRenderer.setRenderResolution(new Vector2().set(config.renderResolution[0], config.renderResolution[1]));
-        this._ptRenderer.updateBVHInfo(bvhInfo, this._scene.environment!, this._scene.iesTexture);
+        this._renderableCameraSet.feedCameras(cameras);
+        this._renderableCameraSet.updateSize(new Vector2().set(config.renderResolution[0], config.renderResolution[1]));
+        if (config.cameraNamespace) {
+            this._renderableCameraSet.currentCameraNamespace = config.cameraNamespace;
+        }
+        this._ptRenderer.updateBVHInfo(bvhInfo, this._scene.environment, this._scene.iesTexture);
         this._ptRenderer.updateRenderSettings(config.bounces, config.environmentIntensity, config.filterGlossyFactor);
-        fitCameraToSelection(this._renderableCameraSet.currentCamera as PerspectiveCamera, this._orbitControls, [bvhInfo.scene]);
+        if (this._renderableCameraSet.currentCamera === this._renderableCameraSet.defaultCamera) {
+            fitCameraToSelection(this._renderableCameraSet.currentCamera as PerspectiveCamera, this._orbitControls, [bvhInfo.scene]);
+        }
         this._animate();
     }
 
@@ -107,7 +116,6 @@ export class Stage {
         const numberOfSamples = Math.floor(this._ptRenderer.samples);
         Logger.debug(`Number of samples rendered: ${numberOfSamples}`);
         this._ptRenderer.material.physicalCamera.updateFrom(this._renderableCameraSet.currentCamera as PerspectiveCamera);
-        this._renderableCameraSet.currentCamera.updateMatrixWorld();
         for (let bounceIdx = 0; bounceIdx < this._currentJobConfig.bounces; bounceIdx++) {
             this._ptRenderer.update();
         };
