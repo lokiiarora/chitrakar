@@ -7,7 +7,7 @@
     "compilerOptions": {
       "outDir": "dist",
       "strict": true,
-      "importsNotUsedAsValues": "error",
+      "importsNotUsedAsValues": "preserve",
       "typeRoots": ["node_modules/@types"]
     }
 }

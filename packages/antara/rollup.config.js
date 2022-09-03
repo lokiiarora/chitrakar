@@ -6,10 +6,11 @@ const packageJSON = require("./package.json");
 
 export default {
   input: path.join(__dirname, 'lib', 'index.ts'),
+  include: ["node_modules/**"],
   treeshake: false,
   output: {
     dir: path.join(__dirname, 'dist'),
-    format: 'es',
+    format: 'iife',
   },
   plugins: [
     esbuild({
@@ -36,8 +37,8 @@ export default {
     }),
     resolve({
       jsnext: true,
-      main: true,
-      browser: true,
+      main: false,
+      browser: false
     })
   ],
 }
