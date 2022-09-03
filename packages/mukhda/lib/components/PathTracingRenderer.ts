@@ -2,6 +2,7 @@ import { FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass.js';
 import type { BufferAttribute, PerspectiveCamera, Texture, Vector2 } from 'three';
 import { BVHInfoGenerate, PathTracingRenderer, PhysicalPathTracingMaterial } from 'three-gpu-pathtracer';
 import type { CustomWebGLRenderer } from './CustomWebGLRenderer';
+import type { Nullable } from '../types';
 
 
 export enum TransparentTraversalsQuality {

@@ -8,8 +8,6 @@
       "outDir": "dist",
       "strict": true,
       "importsNotUsedAsValues": "error",
-      "declarationDir": "types",
-      "emitDeclarationOnly": true,
       "typeRoots": ["node_modules/@types"]
     }
-  }
+}

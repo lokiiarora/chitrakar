@@ -8,7 +8,7 @@
       "moduleResolution": "node",
       "module": "es6",
       "lib": ["es6", "dom"],
-      "target": "es6",
+      "target": "ES2017",
       "declaration": true,
       "stripInternal": true,
       "experimentalDecorators": true,

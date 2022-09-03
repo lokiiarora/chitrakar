@@ -22,7 +22,9 @@
     "url": "git+https://github.com/lokiiarora/chitrakar.git"
   },
   "scripts": {
-    "test": "node ./__tests__/antara.test.js"
+    "test": "node ./__tests__/antara.test.js",
+    "bundle": "rollup -c",
+    "dev": "rollup -c -w"
   },
   "bugs": {
     "url": "https://github.com/lokiiarora/chitrakar/issues"

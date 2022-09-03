@@ -1,4 +1,6 @@
+import THREE from "three";
 
+export type Nullable<T> = T | null;
 declare module 'three-gpu-pathtracer' {
 
     interface BVHInfoPrepare {
@@ -148,4 +150,18 @@ declare module 'three-gpu-pathtracer' {
         generate(texture: THREE.Texture, blur: number): THREE.DataTexture
         dispose(): void
     }
+}
+
+
+export interface StageRenderConfig {
+    url: string;
+    hdri: string;
+    jobId: string;
+    renderResolution: [number, number];
+    samples: number;
+    bounces: number;
+    filterGlossyFactor: number;
+    environmentIntensity: number;
+    iesUri?: string;
+    cameraNamespace?: string;
 }

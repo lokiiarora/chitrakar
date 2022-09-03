@@ -8,7 +8,8 @@
   "author": "Lokesh Raj Arora <lokesh.slg06@gmail.com>",
   "homepage": "https://github.com/lokiiarora/chitrakar#readme",
   "license": "MIT",
-  "main": "lib/mukhda.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -22,7 +23,9 @@
   },
   "scripts": {
     "test": "node ./__tests__/mukhda.test.js",
-    "bundle": "rollup -c",
+    "clean": "rm -rf dist",
+    "clean:bundle": "npm run clean && npm run bundle",
+    "bundle": "NODE_ENV=production rollup -c",
     "dev": "rollup -c -w"
   },
   "bugs": {
@@ -30,13 +33,7 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
-    "@types/three": "^0.143.0",
-    "esbuild": "^0.14.54",
-    "rollup": "^2.77.2",
-    "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-esbuild": "^4.9.1",
-    "rollup-plugin-live-server": "^2.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "@types/three": "^0.143.0"
   },
   "dependencies": {
     "three": "^0.139.2",

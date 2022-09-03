@@ -1,1 +1,0 @@
-export interface CustomTypedEvent<T> extends CustomEvent<T> {}

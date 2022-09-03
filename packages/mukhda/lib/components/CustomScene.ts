@@ -2,6 +2,7 @@ import { EquirectangularReflectionMapping, Scene, Texture, Color } from "three";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { BVHInfoGenerate, MaterialReducer, PathTracingSceneGenerator, IESLoader, IESProfilesTexture } from 'three-gpu-pathtracer';
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import type { Nullable } from "../types";
 
 const envMapLoader = new RGBELoader();
 const gltfLoader = new GLTFLoader();
